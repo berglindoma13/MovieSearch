@@ -5,9 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld.Droid", "HelloWorld\HelloWorld.Droid\HelloWorld.Droid.csproj", "{6DA439FE-B41B-4F71-8008-E54CCF72570E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieSearch.iOS", "HelloWorld\HelloWorld.iOS\MovieSearch.iOS.csproj", "{D4CDF804-B5F1-472B-B4AB-F3497409D29E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld.iOS", "HelloWorld\HelloWorld.iOS\HelloWorld.iOS.csproj", "{D4CDF804-B5F1-472B-B4AB-F3497409D29E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieSearch", "HelloWorld\HelloWorld\MovieSearch.csproj", "{F4048BBE-CF14-41F6-90E6-63AA69AE83EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "HelloWorld\HelloWorld\HelloWorld.csproj", "{F4048BBE-CF14-41F6-90E6-63AA69AE83EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

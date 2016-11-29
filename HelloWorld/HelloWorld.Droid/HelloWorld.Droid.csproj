@@ -44,8 +44,8 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HelloWorld\MovieSearch.csproj">
-      <Name>MovieSearch</Name>
+    <ProjectReference Include="..\HelloWorld\HelloWorld.csproj">
+      <Name>HelloWorld</Name>
       <Project>{F4048BBE-CF14-41F6-90E6-63AA69AE83EB}</Project>
     </ProjectReference>
   </ItemGroup>

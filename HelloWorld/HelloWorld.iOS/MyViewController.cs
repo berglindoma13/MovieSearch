@@ -37,37 +37,54 @@ namespace HelloWorld.iOS
 
             var nameField = CreateNameField();
 
-            var greetingButton = CreateButton("Get movie");
+            var greetingButton = CreateButton("Get movies");
 
             var greetingLabel = CreateGreetingLabel();
 
-            var navigateButton = CreateButton("See Movie List");
+            //var navigateButton = CreateButton("See Movie List");
 
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
                     nameField.ResignFirstResponder();
+
+                    //create the spinner whilst finding movies
+                    var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.White);
+                    spinner.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50);
+                    this._yCoord += StepY;
+                    //spinner.AutoresizingMask = UIViewAutoresizing.All;
+                    this.View.AddSubview(spinner);
+                    spinner.StartAnimating();
+
+                    
+
                     var movieApi = MovieDbFactory.Create<DM.MovieApi.MovieDb.Movies.IApiMovieRequest>().Value;
 
                     DM.MovieApi.ApiResponse.ApiSearchResponse<DM.MovieApi.MovieDb.Movies.MovieInfo> response = await movieApi.SearchByTitleAsync(nameField.Text);
 
-                    greetingLabel.Text = response.Results[0].Title; //results from query
+                    foreach (var i in response.Results)
+                    {
+                        this._movies.AllMovies.Add(i.Title);
+                    }
+                    
+                    this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
+                    //greetingLabel.Text = response.Results[0].Title; //results from query
 
-                    this._movies.AllMovies.Add(nameField.Text);
                 };
 
-            navigateButton.TouchUpInside += (sender, args) =>
+            /*navigateButton.TouchUpInside += (sender, args) =>
             {
                 nameField.ResignFirstResponder();
                 this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
                 
-            };
+            };*/
 
             this.View.AddSubview(prompt);
             this.View.AddSubview(nameField);
             this.View.AddSubview(greetingButton);
             this.View.AddSubview(greetingLabel);
-            this.View.AddSubview(navigateButton);
+            //this.View.AddSubview(navigateButton);
         }
+
 
         private UILabel CreateGreetingLabel()
         {
