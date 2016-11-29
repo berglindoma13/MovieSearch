@@ -47,6 +47,7 @@ namespace HelloWorld.iOS
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
                     nameField.ResignFirstResponder();
+                    greetingButton.Enabled = false;
                     
                     //create the spinner whilst finding movies
                     var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.White);
@@ -66,6 +67,7 @@ namespace HelloWorld.iOS
                     }
                     
                     this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
+                    greetingButton.Enabled = true;
                     //greetingLabel.Text = response.Results[0].Title; //results from query
 
                 };
