@@ -5,18 +5,23 @@ using System.Text;
 namespace HelloWorld.iOS
 {
     using UIKit;
-    public class MovieListController : UIViewController
+    public class MovieListController : UITableViewController
     {
-        private List<string> _nameList;
+        private List<string> _movieList;
 
-        public MovieListController(List<string> nameList)
+        public MovieListController(List<string> movieList)
         {
-            this._nameList = nameList;
+            this._movieList = movieList;
         }
 
         public override void ViewDidLoad()
         {
+            this.Title = "Movie LisT";
+
             this.View.BackgroundColor = UIColor.White;
+
+            this.TableView.Source = new MovieListSource(this._movieList);
+
         }
     }
 }
