@@ -39,9 +39,6 @@ namespace HelloWorld.iOS
 
             var greetingButton = CreateButton("Get movies");
 
-            var greetingLabel = CreateGreetingLabel();
-
-            //var navigateButton = CreateButton("See Movie List");
 
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
@@ -50,10 +47,8 @@ namespace HelloWorld.iOS
                     greetingButton.Enabled = false;
                     
                     //create the spinner whilst finding movies
-                    var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.White);
+                    var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
                     spinner.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50);
-                    this._yCoord += StepY;
-                    //spinner.AutoresizingMask = UIViewAutoresizing.All;
                     this.View.AddSubview(spinner);
                     spinner.StartAnimating();
 
@@ -67,34 +62,16 @@ namespace HelloWorld.iOS
                     }
                     
                     this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
+                    spinner.StopAnimating();
                     greetingButton.Enabled = true;
-                    //greetingLabel.Text = response.Results[0].Title; //results from query
+
 
                 };
-
-            /*navigateButton.TouchUpInside += (sender, args) =>
-            {
-                nameField.ResignFirstResponder();
-                this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
-                
-            };*/
 
             this.View.AddSubview(prompt);
             this.View.AddSubview(nameField);
             this.View.AddSubview(greetingButton);
-            this.View.AddSubview(greetingLabel);
-            //this.View.AddSubview(navigateButton);
-        }
-
-
-        private UILabel CreateGreetingLabel()
-        {
-            var greetingLabel = new UILabel()
-            {
-                Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50)
-            };
-            this._yCoord += StepY;
-            return greetingLabel;
+            
         }
 
         private UIButton CreateButton(string title)
