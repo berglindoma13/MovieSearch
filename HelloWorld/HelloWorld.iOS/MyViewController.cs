@@ -20,12 +20,13 @@ namespace HelloWorld.iOS
         public MyViewController()
         {
             MovieDbFactory.RegisterSettings(new MyClass());
-            this._movies = new Movies();
         }
             
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            this._movies = new Movies();
 
             this.Title = "Movie Search";
 
@@ -46,7 +47,7 @@ namespace HelloWorld.iOS
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
                     nameField.ResignFirstResponder();
-
+                    
                     //create the spinner whilst finding movies
                     var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.White);
                     spinner.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50);
@@ -54,8 +55,6 @@ namespace HelloWorld.iOS
                     //spinner.AutoresizingMask = UIViewAutoresizing.All;
                     this.View.AddSubview(spinner);
                     spinner.StartAnimating();
-
-                    
 
                     var movieApi = MovieDbFactory.Create<DM.MovieApi.MovieDb.Movies.IApiMovieRequest>().Value;
 

@@ -16,7 +16,7 @@ namespace HelloWorld.iOS
 
         public override void ViewDidLoad()
         {
-            this.Title = "Movie LisT";
+            this.Title = "Movie List";
 
             this.View.BackgroundColor = UIColor.White;
 
