@@ -20,13 +20,12 @@ namespace HelloWorld.iOS
         public MyViewController()
         {
             MovieDbFactory.RegisterSettings(new MyClass());
+            this._movies = new Movies();
         }
             
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
-            this._movies = new Movies();
 
             this.Title = "Movie Search";
 
@@ -46,6 +45,7 @@ namespace HelloWorld.iOS
 
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
+                    this._movies.AllMovies.Clear();
                     nameField.ResignFirstResponder();
                     greetingButton.Enabled = false;
                     
