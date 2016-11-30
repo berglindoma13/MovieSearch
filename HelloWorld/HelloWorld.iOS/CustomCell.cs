@@ -34,9 +34,9 @@ namespace HelloWorld.iOS
         {
             base.LayoutSubviews();
 
-            this._imageView.Frame = new CGRect(this.ContentView.Bounds.Width - 60, 5, 33, 33);
-            this._nameLabel.Frame = new CGRect(5, 5, this.ContentView.Bounds.Width - 60, 25);
-            this._actorLabel.Frame = new CGRect(100, 25, 100, 20);
+            this._imageView.Frame = new CGRect(5, 5, 33, 33);
+            this._nameLabel.Frame = new CGRect(40, 5, this.ContentView.Bounds.Width - 60, 25);
+            this._actorLabel.Frame = new CGRect(40, 25, 100, 20);
         }
 
         public void UpdateCell(string title, string year, string imageName, string actor1, string actor2, string actor3)
