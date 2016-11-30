@@ -28,7 +28,7 @@ namespace HelloWorld.iOS
             }
 
             int row = indexPath.Row;
-            cell.UpdateCell(this._movieList[row].Title, this._movieList[row].Year.ToString(), this._movieList[row].ImageName, this._movieList[row].Actor1, this._movieList[row].Actor2, this._movieList[row].Actor3);
+			cell.UpdateCell(this._movieList[row].Title, this._movieList[row].Year.ToString(), this._movieList[row].ImageName, this._movieList[row].Actors, this._movieList[row].Runtime, this._movieList[row].Genre, this._movieList[row].Review);
             //cell.TextLabel.Text = this._movieList[row].Title;
 
             return cell;

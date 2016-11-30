@@ -14,13 +14,7 @@ namespace MovieSearch
             get { return "https://api.themoviedb.org/3/"; }
         }
 
-        public MyClass()
-        {
-            
-        }
-
-
-
+        public MyClass() {}
     }
 }
 

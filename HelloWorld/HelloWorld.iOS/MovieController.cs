@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using CoreGraphics;
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
@@ -43,9 +44,7 @@ namespace HelloWorld.iOS
 
             var greetingButton = CreateButton("Get movies");
 
-
             ImageDownloader imdown = new ImageDownloader(new StorageClient());
-
 
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
@@ -55,7 +54,8 @@ namespace HelloWorld.iOS
                     
                     //create the spinner whilst finding movies
                     var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
-                    spinner.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width, 50);
+			//THIS SHIT --->
+                    spinner.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
                     this.View.AddSubview(spinner);
                     spinner.StartAnimating();
 
@@ -67,12 +67,9 @@ namespace HelloWorld.iOS
                     {
                         ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
 
-                        string[] actor = new string[3];
-
-                        for (int j = 0; (j < 3) && (j < resp.Item.CastMembers.Count); j++)
-                        {
-                            actor[j] = resp.Item.CastMembers[j].Name;
-                        }
+						List<string> actors = new List<string>();
+						List<string> genere = new List<string>();
+                        //string[] actor = new string[3];
 
                         var posterlink = i.PosterPath;
 
@@ -80,15 +77,26 @@ namespace HelloWorld.iOS
 
                         var poster = imdown.DownloadImage(posterlink,localFilePath, CancellationToken.None);
 
+						for (int j = 0; (j < resp.Item.CastMembers.Count); j++)
+						{
+							actors.Add(resp.Item.CastMembers[j].Name);
+						}
 
-                        var movie = new Movie()
-                        {
-                            Title = i.Title,
-                            Year = i.ReleaseDate.Year,
-                            ImageName = localFilePath,
-                            Actor1 = actor[0],
-                            Actor2 = actor[1],
-                            Actor3 = actor[2]
+						for (int j = 0; (j < i.Genres.Count); j++)
+						{
+							genere.Add(i.Genres[j].Name);
+						}
+
+						var movie = new Movie()
+						{
+							Title = i.Title,
+							Year = i.ReleaseDate.Year,
+							ImageName = localFilePath,
+							Actors = actors,
+							
+							Runtime = 0,
+							Genre = genere,
+							Review = i.Overview
                         };
                         this._movies.AllMovies.Add(movie);
                     }

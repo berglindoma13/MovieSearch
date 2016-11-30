@@ -17,7 +17,7 @@ namespace HelloWorld.iOS
             this._imageView = new UIImageView();
             this._nameLabel = new UILabel()
             {
-                Font = UIFont.FromName("Cochin-BoldItalic", 22f),
+                Font = UIFont.FromName("Cochin-BoldItalic", 18f),
                 TextColor = UIColor.FromRGB(127, 51, 0),
             };
             this._actorLabel = new UILabel()
@@ -35,16 +35,34 @@ namespace HelloWorld.iOS
             base.LayoutSubviews();
 
             this._imageView.Frame = new CGRect(5, 5, 33, 33);
-            this._nameLabel.Frame = new CGRect(40, 5, this.ContentView.Bounds.Width - 60, 25);
-            this._actorLabel.Frame = new CGRect(40, 25, 100, 20);
+		//THIS SHIT---->
+            this._nameLabel.Frame = new CGRect(45, 5, this.ContentView.Bounds.Width - 50, 25);
+			this._actorLabel.Frame = new CGRect(45, 25, this.ContentView.Bounds.Width - 50, 20);
         }
 
-        public void UpdateCell(string title, string year, string imageName, string actor1, string actor2, string actor3)
+        public void UpdateCell(string title, string year, string imageName, List<string> actors, int runtime, List<string> genre, string review)
         {
 
             this._imageView.Image = UIImage.FromFile(imageName);
             this._nameLabel.Text = title + " (" + year + ")";
-            this._actorLabel.Text = actor1 + ", " + actor2 + ", " + actor3; 
+			var actorString = "";
+
+			if (actors.Count == 0)
+			{
+				this._actorLabel.Text = " , , ";
+			}
+			else
+			{
+				for (int i = 0; i < actors.Count; i++)
+				{
+					actorString += actors[i];
+					if (i < actors.Count - 1)
+					{
+						actorString += ", ";
+					}
+				}
+				this._actorLabel.Text = actorString;
+			}
 
             this.Accessory = UITableViewCellAccessory.DisclosureIndicator;
 

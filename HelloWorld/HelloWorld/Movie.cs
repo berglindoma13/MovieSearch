@@ -14,8 +14,10 @@ namespace HelloWorld
 
         public string ImageName { get; set; }
 
-        public string Actor1 { get; set; }
-        public string Actor2 { get; set; }
-        public string Actor3 { get; set; }
+		public List<string> Actors { get; set; }
+
+		public int Runtime { get; set; }
+		public List<string> Genre { get; set; }
+		public string Review { get; set; }
     }
 }

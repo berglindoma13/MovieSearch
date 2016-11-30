@@ -12,21 +12,20 @@ namespace HelloWorld
 
         public Movies()
         {
-            this._movies = new List<Movie>();
-            
+            this._movies = new List<Movie>(); 
         }
 
-        public void addMovie(string title, int year, string imageName, string actor1, string actor2, string actor3)
+        public void addMovie(string title, int year, string imageName, List<string> actors, int runtime, List<string> genre, string review)
         {
-            var movie = new Movie()
-            {
-                Title = title,
-                Year = year,
-                ImageName = imageName,
-                Actor1 = actor1,
-                Actor2 = actor2,
-                Actor3 = actor3
-                
+			var movie = new Movie()
+			{
+				Title = title,
+				Year = year,
+				ImageName = imageName,
+				Actors = actors,
+				Runtime = runtime,
+				Genre = genre,
+				Review = review
             };
 
             this._movies.Add(movie);
