@@ -1,0 +1,8 @@
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld\bin\Debug\HelloWorld.dll
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld\bin\Debug\HelloWorld.pdb
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld\bin\Debug\DM.MovieApi.dll
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld\bin\Debug\DM.MovieApi.pdb
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld\bin\Debug\DM.MovieApi.xml
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld\obj\Debug\HelloWorld.csprojResolveAssemblyReference.cache
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld\obj\Debug\HelloWorld.dll
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld\obj\Debug\HelloWorld.pdb
