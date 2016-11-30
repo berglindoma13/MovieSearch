@@ -20,7 +20,7 @@ namespace HelloWorld.iOS
 
             this.View.BackgroundColor = UIColor.White;
 
-            this.TableView.Source = new MovieListSource(this._movieList);
+            this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
 
         }
 
