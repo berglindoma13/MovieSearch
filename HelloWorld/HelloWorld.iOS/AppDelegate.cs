@@ -21,7 +21,7 @@ namespace HelloWorld.iOS
             // If not required for your application you can safely delete this method
             this.Window = new UIWindow(UIScreen.MainScreen.Bounds);
             
-            var controller = new MyViewController();
+            var controller = new MovieController();
 		    this.Window.RootViewController = new UINavigationController(controller);
 
             this.Window.MakeKeyAndVisible();

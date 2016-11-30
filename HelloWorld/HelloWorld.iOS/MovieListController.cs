@@ -7,9 +7,9 @@ namespace HelloWorld.iOS
     using UIKit;
     public class MovieListController : UITableViewController
     {
-        private List<string> _movieList;
+        private List<Movie> _movieList;
 
-        public MovieListController(List<string> movieList)
+        public MovieListController(List<Movie> movieList)
         {
             this._movieList = movieList;
         }
@@ -22,6 +22,15 @@ namespace HelloWorld.iOS
 
             this.TableView.Source = new MovieListSource(this._movieList);
 
+        }
+
+        private void OnSelectedMovie(int row)
+        {
+            var okAlertController = UIAlertController.Create("Movie selected", this._movieList[row].Title, UIAlertControllerStyle.Alert);
+
+            okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+
+            this.PresentViewController(okAlertController, true, null);
         }
     }
 }

@@ -8,14 +8,27 @@ namespace HelloWorld
 {
     public class Movies
     {
-        private List<string> _movies;
+        private List<Movie> _movies;
 
         public Movies()
         {
-            this._movies = new List<string>(){};
+            this._movies = new List<Movie>();
+            
         }
 
-        public List<string> AllMovies => this._movies;
+        public void addMovie(string title, int year, string imageName)
+        {
+            var movie = new Movie()
+            {
+                Title = title,
+                Year = year,
+                ImageName = imageName
+            };
+
+            this._movies.Add(movie);
+        }
+
+        public List<Movie> AllMovies => this._movies;
     }
 
 }
