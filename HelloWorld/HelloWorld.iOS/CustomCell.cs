@@ -43,7 +43,7 @@ namespace HelloWorld.iOS
         {
 
             this._imageView.Image = UIImage.FromFile(imageName);
-            this._nameLabel.Text = title;
+            this._nameLabel.Text = title + "(" + year + ")";
             this._yearLabel.Text = year;
 
             this.Accessory = UITableViewCellAccessory.DisclosureIndicator;

@@ -29,7 +29,7 @@ namespace HelloWorld.iOS
 
             int row = indexPath.Row;
             cell.UpdateCell(this._movieList[row].Title, this._movieList[row].Year.ToString(), this._movieList[row].ImageName);
-            //cell.TextLabel.Text = this._movieList[row].Title;
+            cell.TextLabel.Text = this._movieList[row].Title;
 
             return cell;
 
