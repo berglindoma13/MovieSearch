@@ -16,13 +16,17 @@ namespace HelloWorld
             
         }
 
-        public void addMovie(string title, int year, string imageName)
+        public void addMovie(string title, int year, string imageName, string actor1, string actor2, string actor3)
         {
             var movie = new Movie()
             {
                 Title = title,
                 Year = year,
-                ImageName = imageName
+                ImageName = imageName,
+                Actor1 = actor1,
+                Actor2 = actor2,
+                Actor3 = actor3
+                
             };
 
             this._movies.Add(movie);

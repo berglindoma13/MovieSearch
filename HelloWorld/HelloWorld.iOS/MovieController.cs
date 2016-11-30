@@ -1,5 +1,7 @@
 ﻿using CoreGraphics;
 using DM.MovieApi;
+using DM.MovieApi.ApiResponse;
+using DM.MovieApi.MovieDb.Movies;
 using MovieSearch;
 using UIKit;
 
@@ -56,11 +58,22 @@ namespace HelloWorld.iOS
 
                     DM.MovieApi.ApiResponse.ApiSearchResponse<DM.MovieApi.MovieDb.Movies.MovieInfo> response = await movieApi.SearchByTitleAsync(nameField.Text);
 
-                    
-
                     foreach (var i in response.Results)
                     {
-                        var movie = new Movie() { Title = i.Title, Year = i.ReleaseDate.Year, ImageName = string.Empty };
+                        ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
+                        var actor1 = resp.Item.CastMembers[0].Name;
+                        var actor2 = resp.Item.CastMembers[1].Name;
+                        var actor3 = resp.Item.CastMembers[2].Name;
+
+                        var movie = new Movie()
+                        {
+                            Title = i.Title,
+                            Year = i.ReleaseDate.Year,
+                            ImageName = string.Empty,
+                            Actor1 = actor1,
+                            Actor2 = actor2,
+                            Actor3 = actor3
+                        };
                         this._movies.AllMovies.Add(movie);
                     }
                     

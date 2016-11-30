@@ -28,8 +28,8 @@ namespace HelloWorld.iOS
             }
 
             int row = indexPath.Row;
-            cell.UpdateCell(this._movieList[row].Title, this._movieList[row].Year.ToString(), this._movieList[row].ImageName);
-            cell.TextLabel.Text = this._movieList[row].Title;
+            cell.UpdateCell(this._movieList[row].Title, this._movieList[row].Year.ToString(), this._movieList[row].ImageName, this._movieList[row].Actor1, this._movieList[row].Actor2, this._movieList[row].Actor3);
+            //cell.TextLabel.Text = this._movieList[row].Title;
 
             return cell;
 
