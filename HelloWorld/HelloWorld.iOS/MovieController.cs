@@ -56,9 +56,12 @@ namespace HelloWorld.iOS
 
                     DM.MovieApi.ApiResponse.ApiSearchResponse<DM.MovieApi.MovieDb.Movies.MovieInfo> response = await movieApi.SearchByTitleAsync(nameField.Text);
 
+                    
+
                     foreach (var i in response.Results)
                     {
-                        this._movies.AllMovies.Add(i.Title);
+                        var movie = new Movie() { Title = nameField.Text, Year = 0, ImageName = string.Empty };
+                        this._movies.AllMovies.Add(movie);
                     }
                     
                     this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
