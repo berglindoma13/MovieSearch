@@ -60,7 +60,7 @@ namespace HelloWorld.iOS
 
                     foreach (var i in response.Results)
                     {
-                        var movie = new Movie() { Title = nameField.Text, Year = 0, ImageName = string.Empty };
+                        var movie = new Movie() { Title = i.Title, Year = i.ReleaseDate.Year, ImageName = string.Empty };
                         this._movies.AllMovies.Add(movie);
                     }
                     
