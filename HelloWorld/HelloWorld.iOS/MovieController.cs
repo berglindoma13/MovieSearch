@@ -1,7 +1,9 @@
-﻿using CoreGraphics;
+﻿using System.Threading;
+using CoreGraphics;
 using DM.MovieApi;
 using DM.MovieApi.ApiResponse;
 using DM.MovieApi.MovieDb.Movies;
+using MovieDownload;
 using MovieSearch;
 using UIKit;
 
@@ -42,6 +44,9 @@ namespace HelloWorld.iOS
             var greetingButton = CreateButton("Get movies");
 
 
+            ImageDownloader imdown = new ImageDownloader(new StorageClient());
+
+
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
                     this._movies.AllMovies.Clear();
@@ -61,18 +66,29 @@ namespace HelloWorld.iOS
                     foreach (var i in response.Results)
                     {
                         ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
-                        var actor1 = resp.Item.CastMembers[0].Name;
-                        var actor2 = resp.Item.CastMembers[1].Name;
-                        var actor3 = resp.Item.CastMembers[2].Name;
+
+                        string[] actor = new string[3];
+
+                        for (int j = 0; (j < 3) && (j < resp.Item.CastMembers.Count); j++)
+                        {
+                            actor[j] = resp.Item.CastMembers[j].Name;
+                        }
+
+                        var posterlink = i.PosterPath;
+
+                        var localFilePath = imdown.LocalPathForFilename(posterlink);
+
+                        var poster = imdown.DownloadImage(posterlink,localFilePath, CancellationToken.None);
+
 
                         var movie = new Movie()
                         {
                             Title = i.Title,
                             Year = i.ReleaseDate.Year,
-                            ImageName = string.Empty,
-                            Actor1 = actor1,
-                            Actor2 = actor2,
-                            Actor3 = actor3
+                            ImageName = localFilePath,
+                            Actor1 = actor[0],
+                            Actor2 = actor[1],
+                            Actor3 = actor[2]
                         };
                         this._movies.AllMovies.Add(movie);
                     }
@@ -80,8 +96,6 @@ namespace HelloWorld.iOS
                     this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
                     spinner.StopAnimating();
                     greetingButton.Enabled = true;
-
-
                 };
 
             this.View.AddSubview(prompt);
