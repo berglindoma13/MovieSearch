@@ -8,9 +8,9 @@ namespace HelloWorld.iOS.Controllers
 
     using UIKit;
 
-    public class MovieCollectionSource : UICollectionViewSource
+    public class MovieCollectionSource : UITableViewSource
     {
-        public static readonly NSString MovieCollectionCellId = new NSString("MovieCollectionCell");
+        public readonly NSString MovieCollectionCellId = new NSString("MovieCollectionCell");
 
         private List<Movie> _movieList;
 
@@ -21,29 +21,31 @@ namespace HelloWorld.iOS.Controllers
             this._movieList = movieList;
         }
 
-        public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
+        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = (CustomCollectionCell)collectionView.DequeueReusableCell(MovieCollectionCellId, indexPath);
+            var cell = (CustomCell)tableView.DequeueReusableCell(MovieCollectionCellId);
+
+            if (cell == null)
+            {
+                cell = new CustomCell((NSString)this.MovieCollectionCellId);
+            }
 
             int row = indexPath.Row;
-            cell.UpdateCell(this._movieList[row].Title, this._movieList[row].ImageName);
+            cell.UpdateCell(this._movieList[row].Title, this._movieList[row].Year.ToString(), this._movieList[row].ImageName, this._movieList[row].Actors, this._movieList[row].Runtime, this._movieList[row].Genre, this._movieList[row].Review);
 
             return cell;
+
         }
 
-        public override nint GetItemsCount(UICollectionView collectionView, nint section)
+        public override nint RowsInSection(UITableView tableview, nint section)
         {
             return this._movieList.Count;
         }
 
-        public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
-            Console.WriteLine("Row {0} selected", indexPath.Row);
-        }
-
-        public override bool ShouldSelectItem(UICollectionView collectionView, NSIndexPath indexPath)
-        {
-            return true;
+            tableView.DeselectRow(indexPath, true);
+            this._onSelectedMovie(indexPath.Row);
         }
     }
 }

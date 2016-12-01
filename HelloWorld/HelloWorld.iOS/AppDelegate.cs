@@ -28,7 +28,7 @@ namespace HelloWorld.iOS
             var movieController = new MovieController(movies.AllMovies);
 		    var movieNavigationController = new UINavigationController(movieController);
 
-		    var movieCollectionController = new MovieCollectionController(this.CreateFlowLayout(), movies.AllMovies);
+		    var movieCollectionController = new MovieCollectionController(movies.AllMovies);
             var movieCollectionNavigationController = new UINavigationController(movieCollectionController);
 
             var tabBarController = new TabBarController()

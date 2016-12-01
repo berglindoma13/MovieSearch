@@ -26,13 +26,8 @@ namespace HelloWorld.iOS
 
         private void OnSelectedMovie(int row)
         {
-		//THIS SHIT---->
 			this.NavigationController.PushViewController(new DetailController(this._movieList[row]), true);
-            /*var okAlertController = UIAlertController.Create("Movie selected", this._movieList[row].Title, UIAlertControllerStyle.Alert);
 
-            okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-
-            this.PresentViewController(okAlertController, true, null);*/
         }
     }
 }

@@ -49,8 +49,6 @@ namespace HelloWorld.iOS
 
             var greetingButton = CreateButton("Get movies");
 
-            
-
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
                     this._movies.AllMovies.Clear();
@@ -59,7 +57,7 @@ namespace HelloWorld.iOS
                     
                     //create the spinner whilst finding movies
                     var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
-			//THIS SHIT --->
+
                     spinner.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
                     this.View.AddSubview(spinner);
                     spinner.StartAnimating();
@@ -130,7 +128,6 @@ namespace HelloWorld.iOS
             ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
             var details = await movieApi.FindByIdAsync(i.Id);
 
-            List<string> genere = new List<string>();
             List<string> actors = new List<string>();
 
             for (int j = 0; (j < resp.Item.CastMembers.Count); j++)
@@ -145,24 +142,13 @@ namespace HelloWorld.iOS
 
             var poster = imdown.DownloadImage(posterlink, localFilePath, CancellationToken.None);
 
-
-
-            for (int j = 0; (j < i.Genres.Count); j++)
-            {
-                genere.Add(i.Genres[j].Name);
-            }
-
             var movie = new Movie()
             {
+                Id = i.Id,
                 Title = i.Title,
                 Year = i.ReleaseDate.Year,
                 ImageName = localFilePath,
-                Actors = actors,
-
-                Runtime = details.Item.Runtime,
-                Genre = genere,
-                Review = i.Overview
-              
+                Actors = actors
             };
             if (top)
             {

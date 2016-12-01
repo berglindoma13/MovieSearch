@@ -2,6 +2,9 @@
 using System.Text;
 using System.Threading;
 using CoreGraphics;
+using DM.MovieApi;
+using DM.MovieApi.ApiResponse;
+using DM.MovieApi.MovieDb.Movies;
 
 namespace HelloWorld.iOS
 {
@@ -21,13 +24,33 @@ namespace HelloWorld.iOS
 		public DetailController(Movie movie)
 		{
 			this._movie = movie;
-		}
+            MovieDbFactory.RegisterSettings(new ApiConnectionClass());
+        }
 
-		public override void ViewDidLoad()
+		public override async void ViewDidLoad()
 		{
 			this.Title = "Movie info";
 
-			this.View.BackgroundColor = UIColor.White;
+            var movieApi = MovieDbFactory.Create<DM.MovieApi.MovieDb.Movies.IApiMovieRequest>().Value;
+            ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(_movie.Id);
+
+            DM.MovieApi.ApiResponse.ApiQueryResponse<DM.MovieApi.MovieDb.Movies.Movie> response = await movieApi.FindByIdAsync(_movie.Id);
+        
+            //list the types of genres the movie falls under
+            List<string> genere = new List<string>();
+            for (int j = 0; (j < response.Item.Genres.Count); j++)
+            {
+                genere.Add(response.Item.Genres[j].Name);
+            }
+            
+            //movie runtime added to instance
+            _movie.Runtime = response.Item.Runtime;
+
+            _movie.Review = response.Item.Overview;
+
+            _movie.Genre = genere;
+
+            this.View.BackgroundColor = UIColor.White;
 
 			this._yCoord = StartY;
 

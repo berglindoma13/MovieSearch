@@ -8,14 +8,14 @@ namespace HelloWorld.iOS.Controllers
     using HelloWorld;
 
     using UIKit;
-    public class MovieCollectionController : UICollectionViewController
+    public class MovieCollectionController : UITableViewController
     {
         private List<Movie> _movieList;
 
-        public MovieCollectionController(UICollectionViewFlowLayout layout, List<Movie> movieList) : base(layout)
+        public MovieCollectionController(List<Movie> movieList)
         {
             this._movieList = movieList;
-            this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Favorites, 0);
+            this.TabBarItem = new UITabBarItem(UITabBarSystemItem.TopRated, 0);
         }
 
         public override void ViewDidLoad()
@@ -25,12 +25,14 @@ namespace HelloWorld.iOS.Controllers
             this.View.BackgroundColor = UIColor.White;
             this.Title = "Top Rated Movies";
 
-            this.CollectionView.ContentSize = this.View.Frame.Size;
-            this.CollectionView.ContentInset = new UIEdgeInsets(10, 10, 10, 10);
-            
-            this.CollectionView.RegisterClassForCell(typeof(CustomCollectionCell), MovieCollectionSource.MovieCollectionCellId);
-            
-            this.CollectionView.DataSource = new MovieCollectionSource(this._movieList);
+            this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
+        }
+
+        private void OnSelectedMovie(int row)
+        {
+
+            this.NavigationController.PushViewController(new DetailController(this._movieList[row]), true);
+
         }
     }
 }

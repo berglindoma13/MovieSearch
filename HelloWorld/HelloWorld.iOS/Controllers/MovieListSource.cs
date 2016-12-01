@@ -20,7 +20,7 @@ namespace HelloWorld.iOS
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var cell = (CustomCell)tableView.DequeueReusableCell(this.MovieListCellId);
+            var cell = (CustomCell)tableView.DequeueReusableCell(MovieListCellId);
             if (cell == null)
             {
                 //cell = new UITableViewCell(UITableViewCellStyle.Default, (NSString)this.MovieListCellId);
