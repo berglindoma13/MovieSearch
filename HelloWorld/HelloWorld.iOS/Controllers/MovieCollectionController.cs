@@ -14,6 +14,7 @@ namespace HelloWorld.iOS.Controllers
     using UIKit;
     public class MovieCollectionController : UITableViewController
     {
+        
         private List<Movie> _movieList;
 
         private SetMovieInfo setMovieInfo;
@@ -27,6 +28,7 @@ namespace HelloWorld.iOS.Controllers
 
         public override async void ViewDidLoad()
         {
+
             base.ViewDidLoad();
 
             this.View.BackgroundColor = UIColor.White;
@@ -50,7 +52,8 @@ namespace HelloWorld.iOS.Controllers
             }
 
 
-
+            spinner.StopAnimating();
+            this.TableView.ReloadData();
             this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
         }
 

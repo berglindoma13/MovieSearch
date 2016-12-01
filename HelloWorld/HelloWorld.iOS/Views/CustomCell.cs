@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CoreGraphics;
 using Foundation;
 
@@ -42,7 +43,15 @@ namespace HelloWorld.iOS
         public void UpdateCell(string title, string year, string imageName, List<string> actors, int runtime,
             List<string> genre, string review)
         {
-            _imageView.Image = UIImage.FromFile(imageName);
+            if (imageName != null)
+            {
+                _imageView.Image = UIImage.FromFile(imageName);
+
+            }
+            else
+            {
+                _imageView.Image = UIImage.FromFile("not_found-full.png");
+            }
             _nameLabel.Text = title + " (" + year + ")";
             var actorString = "";
 
