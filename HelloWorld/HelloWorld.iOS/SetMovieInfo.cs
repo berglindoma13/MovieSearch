@@ -22,12 +22,27 @@ namespace HelloWorld.iOS
             ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
             var details = await movieApi.FindByIdAsync(i.Id);
 
-            List<string> actors = new List<string>();
+            string[] actors = new string[3];
+            string actors_3;
 
-            for (int j = 0; (j < resp.Item.CastMembers.Count); j++)
+            if (resp.Item.CastMembers.Count == 0)
             {
-                actors.Add(resp.Item.CastMembers[j].Name);
+                actors_3 = " , , ";
             }
+
+            int j = 0;
+            int k = 0;
+            while ((j < 3) && (k < resp.Item.CastMembers.Count))
+            {
+                if (!resp.Item.CastMembers[k].Equals(null)) 
+                {
+                    actors[k] = resp.Item.CastMembers[k].Name;
+                    j++;
+                }
+                k++;
+            }
+
+            actors_3 = actors[0] + ", " + actors[1] + ", " + actors[2];
             var posterlink = i.PosterPath;
 
             var localFilePath = imdown.LocalPathForFilename(posterlink);
@@ -38,7 +53,7 @@ namespace HelloWorld.iOS
             movie.Title = i.Title;
             movie.Year = i.ReleaseDate.Year;
             movie.ImageName = localFilePath;
-            movie.Actors = actors;
+            movie.Actors = actors_3;
 
         }
     }

@@ -40,7 +40,7 @@ namespace HelloWorld.iOS
             _actorLabel.Frame = new CGRect(45, 25, ContentView.Bounds.Width - 50, 20);
         }
 
-        public void UpdateCell(string title, string year, string imageName, List<string> actors, int runtime,
+        public void UpdateCell(string title, string year, string imageName, string actors, int runtime,
             List<string> genre, string review)
         {
             if (imageName != null)
@@ -53,25 +53,10 @@ namespace HelloWorld.iOS
                 _imageView.Image = UIImage.FromFile("not_found-full.png");
             }
             _nameLabel.Text = title + " (" + year + ")";
-            var actorString = "";
 
-            if (actors.Count == 0)
-            {
-                _actorLabel.Text = " , , ";
-            }
-            else
-            {
-                for (int i = 0; i < actors.Count; i++)
-                {
-                    actorString += actors[i];
-                    if (i < actors.Count - 1)
-                    {
-                        actorString += ", ";
-                    }
-                }
-                _actorLabel.Text = actorString;
-            }
 
+            _actorLabel.Text = actors;
+       
             Accessory = UITableViewCellAccessory.DisclosureIndicator;
         }
     }

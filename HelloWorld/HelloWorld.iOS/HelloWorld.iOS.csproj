@@ -156,6 +156,9 @@
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Views\CustomCollectionCell.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\not_found-full.png" />
+  </ItemGroup>
   <Import Project="..\..\MovieDownload\MovieDownload.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
