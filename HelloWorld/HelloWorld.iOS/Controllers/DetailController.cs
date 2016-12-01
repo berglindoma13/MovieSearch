@@ -50,7 +50,7 @@ namespace HelloWorld.iOS
 
             _movie.Genre = genere;
 
-            this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.DarkGray;
 
 			this._yCoord = StartY;
 
@@ -118,7 +118,8 @@ namespace HelloWorld.iOS
 			{
 				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
 				Text = _movie.Review,
-				Lines = 0
+                Font = UIFont.FromName("AmericanTypewriter-Light", 10f),
+                Lines = 0
 			};
 			this._yCoord += StepY;
 			return overview;

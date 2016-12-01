@@ -20,7 +20,6 @@ namespace HelloWorld.iOS
         private int _yCoord;
 
         private Movies _movies;
-        private Movies _topRatedMovies;
 
         
         private SetMovieInfo setMovieInfo;
@@ -29,7 +28,6 @@ namespace HelloWorld.iOS
         {
             MovieDbFactory.RegisterSettings(new ApiConnectionClass());
             this._movies = new Movies();
-            this._topRatedMovies = new Movies();
             this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
             
             setMovieInfo = new SetMovieInfo();
@@ -75,8 +73,6 @@ namespace HelloWorld.iOS
                         setMovieInfo.setInfo(i, movieApi, movie);
                         this._movies.AllMovies.Add(movie);
                     }
-
-                    
 
                     this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
                     spinner.StopAnimating();
