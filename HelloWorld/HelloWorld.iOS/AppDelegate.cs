@@ -1,4 +1,6 @@
-﻿using Foundation;
+﻿using System.Drawing;
+using Foundation;
+using HelloWorld.iOS.Controllers;
 using UIKit;
 
 namespace HelloWorld.iOS
@@ -20,15 +22,40 @@ namespace HelloWorld.iOS
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             this.Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+            var movies = new Movies();
+		    
+            var movieController = new MovieController(movies.AllMovies);
+		    var movieNavigationController = new UINavigationController(movieController);
+
+		    var movieCollectionController = new MovieCollectionController(this.CreateFlowLayout(), movies.AllMovies);
+            var movieCollectionNavigationController = new UINavigationController(movieCollectionController);
+
+            var tabBarController = new TabBarController()
+            {
+                ViewControllers = new UIViewController[] {movieNavigationController, movieCollectionNavigationController}
+            };
+
+		    this.Window.RootViewController = tabBarController;
             
-            var controller = new MovieController();
-		    this.Window.RootViewController = new UINavigationController(controller);
+            //var controller = new MovieController();
+		    //this.Window.RootViewController = new UINavigationController(controller);
 
             this.Window.MakeKeyAndVisible();
             return true;
 		}
 
-		public override void OnResignActivation (UIApplication application)
+        private UICollectionViewFlowLayout CreateFlowLayout()
+        {
+            return new UICollectionViewFlowLayout()
+            {
+                MinimumInteritemSpacing = 5,
+                MinimumLineSpacing = 5,
+                ItemSize = new SizeF(80, 80)
+            };
+        }
+
+        public override void OnResignActivation (UIApplication application)
 		{
 			// Invoked when the application is about to move from active to inactive state.
 			// This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) 
