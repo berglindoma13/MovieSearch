@@ -143,13 +143,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomCell.cs" />
-    <Compile Include="DetailController.cs" />
+    <Compile Include="Controllers\MovieCollectionController.cs" />
+    <Compile Include="Controllers\TabBarController.cs" />
+    <Compile Include="Views\CustomCell.cs" />
+    <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MovieListController.cs" />
-    <Compile Include="MovieListSource.cs" />
-    <Compile Include="MovieController.cs" />
+    <Compile Include="Controllers\MovieListController.cs" />
+    <Compile Include="Controllers\MovieListSource.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
   </ItemGroup>
   <Import Project="..\..\MovieDownload\MovieDownload.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

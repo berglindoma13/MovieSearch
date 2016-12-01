@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using HelloWorld.iOS.Views;
 
 namespace HelloWorld.iOS.Controllers
 {
@@ -22,7 +23,14 @@ namespace HelloWorld.iOS.Controllers
             base.ViewDidLoad();
 
             this.View.BackgroundColor = UIColor.White;
-            this.Title = "Collection";
+            this.Title = "Top Rated Movies";
+
+            this.CollectionView.ContentSize = this.View.Frame.Size;
+            this.CollectionView.ContentInset = new UIEdgeInsets(10, 10, 10, 10);
+            
+            this.CollectionView.RegisterClassForCell(typeof(CustomCollectionCell), MovieCollectionSource.MovieCollectionCellId);
+            
+            this.CollectionView.DataSource = new MovieCollectionSource(this._movieList);
         }
     }
 }

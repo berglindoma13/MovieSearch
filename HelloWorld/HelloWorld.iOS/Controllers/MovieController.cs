@@ -20,12 +20,17 @@ namespace HelloWorld.iOS
         private int _yCoord;
 
         private Movies _movies;
+        private Movies _topRatedMovies;
+
+        private ImageDownloader imdown;
 
         public MovieController(List<Movie> movieList)
         {
             MovieDbFactory.RegisterSettings(new ApiConnectionClass());
             this._movies = new Movies();
+            this._topRatedMovies = new Movies();
             this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
+            imdown = new ImageDownloader(new StorageClient());
         }
             
         public override void ViewDidLoad()
@@ -44,7 +49,7 @@ namespace HelloWorld.iOS
 
             var greetingButton = CreateButton("Get movies");
 
-            ImageDownloader imdown = new ImageDownloader(new StorageClient());
+            
 
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
@@ -65,42 +70,18 @@ namespace HelloWorld.iOS
 
                     foreach (var i in response.Results)
                     {
-                        ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
-
-						List<string> actors = new List<string>();
-						List<string> genere = new List<string>();
-                        //string[] actor = new string[3];
-
-                        var posterlink = i.PosterPath;
-
-                        var localFilePath = imdown.LocalPathForFilename(posterlink);
-
-                        var poster = imdown.DownloadImage(posterlink,localFilePath, CancellationToken.None);
-
-						for (int j = 0; (j < resp.Item.CastMembers.Count); j++)
-						{
-							actors.Add(resp.Item.CastMembers[j].Name);
-						}
-
-						for (int j = 0; (j < i.Genres.Count); j++)
-						{
-							genere.Add(i.Genres[j].Name);
-						}
-
-						var movie = new Movie()
-						{
-							Title = i.Title,
-							Year = i.ReleaseDate.Year,
-							ImageName = localFilePath,
-							Actors = actors,
-							
-							Runtime = 0,
-							Genre = genere,
-							Review = i.Overview
-                        };
-                        this._movies.AllMovies.Add(movie);
+                        setInfo(i, movieApi, false);
                     }
-                    
+
+                    //get topRated Movies
+                    ApiSearchResponse<MovieInfo> res = await movieApi.GetTopRatedAsync();
+                    List<Movie> topRated = new List<Movie>();
+
+                    foreach (var i in res.Results)
+                    {
+                        setInfo(i, movieApi, true);    
+                    }
+
                     this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
                     spinner.StopAnimating();
                     greetingButton.Enabled = true;
@@ -143,5 +124,56 @@ namespace HelloWorld.iOS
             this._yCoord += StepY;
             return prompt;
         }
+
+        private async void setInfo(MovieInfo i, IApiMovieRequest movieApi, bool top)
+        {
+            ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
+            var details = await movieApi.FindByIdAsync(i.Id);
+
+            List<string> genere = new List<string>();
+            List<string> actors = new List<string>();
+
+            for (int j = 0; (j < resp.Item.CastMembers.Count); j++)
+            {
+                actors.Add(resp.Item.CastMembers[j].Name);
+            }
+            //string[] actor = new string[3];
+
+            var posterlink = i.PosterPath;
+
+            var localFilePath = imdown.LocalPathForFilename(posterlink);
+
+            var poster = imdown.DownloadImage(posterlink, localFilePath, CancellationToken.None);
+
+
+
+            for (int j = 0; (j < i.Genres.Count); j++)
+            {
+                genere.Add(i.Genres[j].Name);
+            }
+
+            var movie = new Movie()
+            {
+                Title = i.Title,
+                Year = i.ReleaseDate.Year,
+                ImageName = localFilePath,
+                Actors = actors,
+
+                Runtime = details.Item.Runtime,
+                Genre = genere,
+                Review = i.Overview
+              
+            };
+            if (top)
+            {
+                this._topRatedMovies.AllMovies.Add(movie);
+            }
+            else
+            {
+                this._movies.AllMovies.Add(movie);
+            }
+            
+        }
+    
     }
 }
