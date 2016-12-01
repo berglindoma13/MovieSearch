@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using DM.MovieApi.ApiResponse;
 using DM.MovieApi.MovieDb.Movies;
 using MovieDownload;
@@ -17,7 +18,7 @@ namespace HelloWorld.iOS
             imdown = new ImageDownloader(new StorageClient());
         }
 
-        public async void setInfo(MovieInfo i, IApiMovieRequest movieApi, Movie movie)
+        public async Task setInfo(MovieInfo i, IApiMovieRequest movieApi, Movie movie)
         {
             ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
 
@@ -54,7 +55,6 @@ namespace HelloWorld.iOS
             movie.Year = i.ReleaseDate.Year;
             movie.ImageName = localFilePath;
             movie.Actors = actors_3;
-
         }
     }
 }

@@ -23,16 +23,13 @@ namespace HelloWorld.iOS
             var cell = (CustomCell)tableView.DequeueReusableCell(MovieListCellId);
             if (cell == null)
             {
-                //cell = new UITableViewCell(UITableViewCellStyle.Default, (NSString)this.MovieListCellId);
                 cell = new CustomCell((NSString)this.MovieListCellId);
             }
 
             int row = indexPath.Row;
 			cell.UpdateCell(this._movieList[row].Title, this._movieList[row].Year.ToString(), this._movieList[row].ImageName, this._movieList[row].Actors, this._movieList[row].Runtime, this._movieList[row].Genre, this._movieList[row].Review);
-            //cell.TextLabel.Text = this._movieList[row].Title;
 
             return cell;
-
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)

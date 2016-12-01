@@ -11,9 +11,7 @@ namespace HelloWorld.iOS.Controllers
     public class MovieCollectionSource : UITableViewSource
     {
         public readonly NSString MovieCollectionCellId = new NSString("MovieCollectionCell");
-
         private List<Movie> _movieList;
-
         private Action<int> _onSelectedMovie;
 
         public MovieCollectionSource(List<Movie> movieList)
@@ -34,7 +32,6 @@ namespace HelloWorld.iOS.Controllers
             cell.UpdateCell(this._movieList[row].Title, this._movieList[row].Year.ToString(), this._movieList[row].ImageName, this._movieList[row].Actors, this._movieList[row].Runtime, this._movieList[row].Genre, this._movieList[row].Review);
 
             return cell;
-
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
@@ -45,7 +42,7 @@ namespace HelloWorld.iOS.Controllers
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
             tableView.DeselectRow(indexPath, true);
-            this._onSelectedMovie(indexPath.Row);
+            _onSelectedMovie(indexPath.Row);
         }
     }
 }

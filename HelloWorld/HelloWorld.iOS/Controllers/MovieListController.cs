@@ -14,12 +14,10 @@ namespace HelloWorld.iOS
             this._movieList = movieList;
         }
 
-        public override void ViewDidLoad()
+		public override void ViewDidLoad()
         {
             this.Title = "Movie List";
-
             this.View.BackgroundColor = UIColor.White;
-
             this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
             this.TableView.ReloadData();
         }
@@ -27,7 +25,6 @@ namespace HelloWorld.iOS
         private void OnSelectedMovie(int row)
         {
 			this.NavigationController.PushViewController(new DetailController(this._movieList[row]), true);
-
         }
     }
 }

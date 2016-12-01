@@ -13,7 +13,6 @@ namespace HelloWorld.iOS.Controllers
 
             this.TabBar.BackgroundColor = UIColor.LightGray;
             this.TabBar.TintColor = UIColor.Red;
-
             this.SelectedIndex = 0;
         }
     }

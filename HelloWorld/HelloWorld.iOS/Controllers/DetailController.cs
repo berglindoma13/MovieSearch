@@ -12,13 +12,9 @@ namespace HelloWorld.iOS
 	public class DetailController : UIViewController
 	{
 		private Movie _movie;
-
 		private const int HorizontalMargin = 20;
-
 		private const int StartY = 80;
-
 		private const int StepY = 30;
-
 		private int _yCoord;
 
 		public DetailController(Movie movie)
@@ -32,7 +28,6 @@ namespace HelloWorld.iOS
 			this.Title = "Movie info";
 
             var movieApi = MovieDbFactory.Create<DM.MovieApi.MovieDb.Movies.IApiMovieRequest>().Value;
-            ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(_movie.Id);
 
             DM.MovieApi.ApiResponse.ApiQueryResponse<DM.MovieApi.MovieDb.Movies.Movie> response = await movieApi.FindByIdAsync(_movie.Id);
 
@@ -45,26 +40,23 @@ namespace HelloWorld.iOS
 		    }
 		    else
 		    {
-		        genreList = response.Item.Genres[0].ToString();
+				genreList = response.Item.Genres[0].Name.ToString();
 		    }
 
 		    for (int j = 1; j < response.Item.Genres.Count; j++)
             {
                 if (!response.Item.Genres[j].Equals(null))
                 {
-                    genreList += ", " + response.Item.Genres[j].ToString();
+					genreList += ", " + response.Item.Genres[j].Name.ToString();
                 }
             }
 
             //movie runtime added to instance
             _movie.Runtime = response.Item.Runtime;
-
             _movie.Review = response.Item.Overview;
-
             _movie.Genre = genreList;
 
-            this.View.BackgroundColor = UIColor.DarkGray;
-
+			this.View.BackgroundColor = UIColor.White;
 			this._yCoord = StartY;
 
 			var movieImage = createImage();
@@ -72,12 +64,10 @@ namespace HelloWorld.iOS
 			var details = createDetails();
 			var overview = createOverview();
 
-
 			this.View.AddSubview(movieImage);
 			this.View.AddSubview(movieName);
 			this.View.AddSubview(details);
 			this.View.AddSubview(overview);
-
 		}
 
 		private UIImageView createImage()
@@ -105,8 +95,6 @@ namespace HelloWorld.iOS
 
 		private UILabel createDetails()
 		{
-			
-
 			var details = new UILabel()
 			{
 				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
@@ -121,7 +109,7 @@ namespace HelloWorld.iOS
 		{
 			var overview = new UILabel()
 			{
-				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 200),
+				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 150),
 				Text = _movie.Review,
                 Font = UIFont.FromName("AmericanTypewriter-Light", 10f),
                 Lines = 0

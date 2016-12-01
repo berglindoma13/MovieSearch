@@ -12,16 +12,10 @@ namespace HelloWorld.iOS
     public class MovieController : UIViewController
     {
         private const int HorizontalMargin = 20;
-
         private const int StartY = 80;
-
         private const int StepY = 50;
-
         private int _yCoord;
-
         private Movies _movies;
-
-        
         private SetMovieInfo setMovieInfo;
 
         public MovieController(List<Movie> movieList)
@@ -65,12 +59,11 @@ namespace HelloWorld.iOS
                     var movieApi = MovieDbFactory.Create<DM.MovieApi.MovieDb.Movies.IApiMovieRequest>().Value;
 
                     DM.MovieApi.ApiResponse.ApiSearchResponse<DM.MovieApi.MovieDb.Movies.MovieInfo> response = await movieApi.SearchByTitleAsync(nameField.Text);
-
                     
                     foreach (var i in response.Results)
                     {
                         var movie = new Movie();
-                        setMovieInfo.setInfo(i, movieApi, movie);
+                        await setMovieInfo.setInfo(i, movieApi, movie);
                         this._movies.AllMovies.Add(movie);
                     }
 
@@ -82,7 +75,6 @@ namespace HelloWorld.iOS
             this.View.AddSubview(prompt);
             this.View.AddSubview(nameField);
             this.View.AddSubview(greetingButton);
-            
         }
 
         private UIButton CreateButton(string title)
@@ -116,8 +108,5 @@ namespace HelloWorld.iOS
             this._yCoord += StepY;
             return prompt;
         }
-
-        
-    
     }
 }
