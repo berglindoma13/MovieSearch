@@ -17,7 +17,7 @@ namespace HelloWorld.iOS
 
 		private const int StartY = 80;
 
-		private const int StepY = 50;
+		private const int StepY = 30;
 
 		private int _yCoord;
 
@@ -35,20 +35,33 @@ namespace HelloWorld.iOS
             ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(_movie.Id);
 
             DM.MovieApi.ApiResponse.ApiQueryResponse<DM.MovieApi.MovieDb.Movies.Movie> response = await movieApi.FindByIdAsync(_movie.Id);
-        
+
             //list the types of genres the movie falls under
-            List<string> genere = new List<string>();
-            for (int j = 0; (j < response.Item.Genres.Count); j++)
+            string genreList;
+
+		    if (response.Item.Genres.Count == 0)
+		    {
+		        genreList = "";
+		    }
+		    else
+		    {
+		        genreList = response.Item.Genres[0].ToString();
+		    }
+
+		    for (int j = 1; j < response.Item.Genres.Count; j++)
             {
-                genere.Add(response.Item.Genres[j].Name);
+                if (!response.Item.Genres[j].Equals(null))
+                {
+                    genreList += ", " + response.Item.Genres[j].ToString();
+                }
             }
-            
+
             //movie runtime added to instance
             _movie.Runtime = response.Item.Runtime;
 
             _movie.Review = response.Item.Overview;
 
-            _movie.Genre = genere;
+            _movie.Genre = genreList;
 
             this.View.BackgroundColor = UIColor.DarkGray;
 
@@ -71,11 +84,11 @@ namespace HelloWorld.iOS
 		{
 			var movieImage = new UIImageView()
 			{
-				Frame = new CGRect(5, 5, 33, 33),
+				Frame = new CGRect(20, 80, this.View.Bounds.Width - 2*HorizontalMargin, 200),
 				Image = UIImage.FromFile(_movie.ImageName)
 
 			};
-			this._yCoord += StepY;
+			this._yCoord += 210;
 			return movieImage;
 		}
 
@@ -92,20 +105,12 @@ namespace HelloWorld.iOS
 
 		private UILabel createDetails()
 		{
-			var genreString = "";
-			for (int i = 0; i < _movie.Genre.Count; i++)
-			{
-				genreString += _movie.Genre[i];
-				if (i < _movie.Genre.Count-1)
-				{
-					genreString += ", ";
-				}
-			}
+			
 
 			var details = new UILabel()
 			{
 				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
-				Text = _movie.Runtime.ToString() + " min | " + genreString
+				Text = _movie.Runtime.ToString() + " min | " + _movie.Genre
 			
 			};
 			this._yCoord += StepY;
@@ -116,7 +121,7 @@ namespace HelloWorld.iOS
 		{
 			var overview = new UILabel()
 			{
-				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
+				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 200),
 				Text = _movie.Review,
                 Font = UIFont.FromName("AmericanTypewriter-Light", 10f),
                 Lines = 0

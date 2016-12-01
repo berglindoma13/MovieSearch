@@ -15,7 +15,7 @@ namespace HelloWorld
             this._movies = new List<Movie>(); 
         }
 
-        public void addMovie(int id, string title, int year, string imageName, string actors, int runtime, List<string> genre, string review)
+        public void addMovie(int id, string title, int year, string imageName, string actors, int runtime, string genre, string review)
         {
 			var movie = new Movie()
 			{

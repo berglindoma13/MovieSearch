@@ -20,7 +20,6 @@ namespace HelloWorld.iOS
         public async void setInfo(MovieInfo i, IApiMovieRequest movieApi, Movie movie)
         {
             ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
-            var details = await movieApi.FindByIdAsync(i.Id);
 
             string[] actors = new string[3];
             string actors_3;
@@ -43,11 +42,12 @@ namespace HelloWorld.iOS
             }
 
             actors_3 = actors[0] + ", " + actors[1] + ", " + actors[2];
+
             var posterlink = i.PosterPath;
 
             var localFilePath = imdown.LocalPathForFilename(posterlink);
 
-            var poster = imdown.DownloadImage(posterlink, localFilePath, CancellationToken.None);
+            await imdown.DownloadImage(posterlink, localFilePath, CancellationToken.None);
 
             movie.Id = i.Id;
             movie.Title = i.Title;

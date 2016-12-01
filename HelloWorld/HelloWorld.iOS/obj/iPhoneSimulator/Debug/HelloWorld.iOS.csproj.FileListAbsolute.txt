@@ -12,5 +12,9 @@ C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vi
 C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld.iOS\obj\iPhoneSimulator\Debug\HelloWorld.iOS.csprojResolveAssemblyReference.cache
 C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld.iOS\obj\iPhoneSimulator\Debug\HelloWorld.iOS.exe
 C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld.iOS\obj\iPhoneSimulator\Debug\HelloWorld.iOS.pdb
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld.iOS\obj\iPhoneSimulator\Debug\optimized\not_found-full.png
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld.iOS\bin\iPhoneSimulator\Debug\Newtonsoft.Json.dll
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld.iOS\bin\iPhoneSimulator\Debug\Newtonsoft.Json.xml
+C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld.iOS\bin\iPhoneSimulator\Debug\HelloWorld.dll.mdb
 C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld.iOS\obj\iPhoneSimulator\Debug\HelloWorld.iOS.exe.mdb
 C:\Users\Berglind\OneDrive\Documents\Þroun Smaforrita\Vika1\vika1MovieSearch\vika1APP\HelloWorld\HelloWorld.iOS\bin\iPhoneSimulator\Debug\HelloWorld.iOS.exe.mdb

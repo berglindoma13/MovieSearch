@@ -35,13 +35,12 @@ namespace HelloWorld.iOS
             base.LayoutSubviews();
 
             _imageView.Frame = new CGRect(5, 5, 33, 33);
-            //THIS SHIT---->
             _nameLabel.Frame = new CGRect(45, 5, ContentView.Bounds.Width - 50, 25);
             _actorLabel.Frame = new CGRect(45, 25, ContentView.Bounds.Width - 50, 20);
         }
 
         public void UpdateCell(string title, string year, string imageName, string actors, int runtime,
-            List<string> genre, string review)
+            string genre, string review)
         {
             if (imageName != null)
             {

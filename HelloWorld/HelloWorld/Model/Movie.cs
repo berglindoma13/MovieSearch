@@ -18,7 +18,7 @@ namespace HelloWorld
 		public string Actors { get; set; }
 
 		public int Runtime { get; set; }
-		public List<string> Genre { get; set; }
+		public string Genre { get; set; }
 		public string Review { get; set; }
     }
 }

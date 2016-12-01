@@ -19,6 +19,8 @@ namespace HelloWorld.iOS.Controllers
 
         private SetMovieInfo setMovieInfo;
 
+       
+
         public MovieCollectionController(List<Movie> movieList)
         {
             setMovieInfo = new SetMovieInfo();
@@ -28,7 +30,6 @@ namespace HelloWorld.iOS.Controllers
 
         public override async void ViewDidLoad()
         {
-
             base.ViewDidLoad();
 
             this.View.BackgroundColor = UIColor.White;
@@ -42,7 +43,6 @@ namespace HelloWorld.iOS.Controllers
             //get topRated Movies
             var movieApi = MovieDbFactory.Create<DM.MovieApi.MovieDb.Movies.IApiMovieRequest>().Value;
             ApiSearchResponse<MovieInfo> res = await movieApi.GetTopRatedAsync();
-            List<Movie> topRated = new List<Movie>();
 
             foreach (var i in res.Results)
             {
@@ -51,10 +51,11 @@ namespace HelloWorld.iOS.Controllers
                 this._movieList.Add(movie);
             }
 
-
-            spinner.StopAnimating();
-            this.TableView.ReloadData();
             this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
+            spinner.StopAnimating();
+
+            this.TableView.ReloadData();
+
         }
 
         private void OnSelectedMovie(int row)
