@@ -22,7 +22,8 @@ namespace HelloWorld.iOS
         private Movies _movies;
         private Movies _topRatedMovies;
 
-        private ImageDownloader imdown;
+        
+        private SetMovieInfo setMovieInfo;
 
         public MovieController(List<Movie> movieList)
         {
@@ -30,7 +31,8 @@ namespace HelloWorld.iOS
             this._movies = new Movies();
             this._topRatedMovies = new Movies();
             this.TabBarItem = new UITabBarItem(UITabBarSystemItem.Search, 0);
-            imdown = new ImageDownloader(new StorageClient());
+            
+            setMovieInfo = new SetMovieInfo();
         }
             
         public override void ViewDidLoad()
@@ -66,19 +68,15 @@ namespace HelloWorld.iOS
 
                     DM.MovieApi.ApiResponse.ApiSearchResponse<DM.MovieApi.MovieDb.Movies.MovieInfo> response = await movieApi.SearchByTitleAsync(nameField.Text);
 
+                    
                     foreach (var i in response.Results)
                     {
-                        setInfo(i, movieApi, false);
+                        var movie = new Movie();
+                        setMovieInfo.setInfo(i, movieApi, movie);
+                        this._movies.AllMovies.Add(movie);
                     }
 
-                    //get topRated Movies
-                    ApiSearchResponse<MovieInfo> res = await movieApi.GetTopRatedAsync();
-                    List<Movie> topRated = new List<Movie>();
-
-                    foreach (var i in res.Results)
-                    {
-                        setInfo(i, movieApi, true);    
-                    }
+                    
 
                     this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
                     spinner.StopAnimating();
@@ -123,43 +121,7 @@ namespace HelloWorld.iOS
             return prompt;
         }
 
-        private async void setInfo(MovieInfo i, IApiMovieRequest movieApi, bool top)
-        {
-            ApiQueryResponse<MovieCredit> resp = await movieApi.GetCreditsAsync(i.Id);
-            var details = await movieApi.FindByIdAsync(i.Id);
-
-            List<string> actors = new List<string>();
-
-            for (int j = 0; (j < resp.Item.CastMembers.Count); j++)
-            {
-                actors.Add(resp.Item.CastMembers[j].Name);
-            }
-            //string[] actor = new string[3];
-
-            var posterlink = i.PosterPath;
-
-            var localFilePath = imdown.LocalPathForFilename(posterlink);
-
-            var poster = imdown.DownloadImage(posterlink, localFilePath, CancellationToken.None);
-
-            var movie = new Movie()
-            {
-                Id = i.Id,
-                Title = i.Title,
-                Year = i.ReleaseDate.Year,
-                ImageName = localFilePath,
-                Actors = actors
-            };
-            if (top)
-            {
-                this._topRatedMovies.AllMovies.Add(movie);
-            }
-            else
-            {
-                this._movies.AllMovies.Add(movie);
-            }
-            
-        }
+        
     
     }
 }

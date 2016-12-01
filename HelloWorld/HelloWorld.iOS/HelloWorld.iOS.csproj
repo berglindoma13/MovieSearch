@@ -144,7 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\MovieCollectionController.cs" />
+    <Compile Include="Controllers\MovieCollectionSource.cs" />
     <Compile Include="Controllers\TabBarController.cs" />
+    <Compile Include="SetMovieInfo.cs" />
     <Compile Include="Views\CustomCell.cs" />
     <Compile Include="Controllers\DetailController.cs" />
     <Compile Include="Main.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="Controllers\MovieListController.cs" />
     <Compile Include="Controllers\MovieListSource.cs" />
     <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Views\CustomCollectionCell.cs" />
   </ItemGroup>
   <Import Project="..\..\MovieDownload\MovieDownload.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
