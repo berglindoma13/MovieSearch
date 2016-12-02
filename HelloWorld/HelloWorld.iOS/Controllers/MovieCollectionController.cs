@@ -28,7 +28,7 @@ namespace HelloWorld.iOS.Controllers
         {
             base.ViewDidLoad();
 
-            this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.FromRGB(0.714f, 0.98f, 1);
             this.Title = "Top Rated Movies";
 
 			var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);

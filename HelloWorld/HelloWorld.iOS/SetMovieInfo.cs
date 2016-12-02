@@ -25,24 +25,27 @@ namespace HelloWorld.iOS
             string[] actors = new string[3];
             string actors_3;
 
-            if (resp.Item.CastMembers.Count == 0)
-            {
-                actors_3 = " , , ";
-            }
+			if (resp.Item.CastMembers.Count == 0)
+			{
+				actors_3 = "";
+			}
+			else 
+			{
+				int j = 0;
+				int k = 0;
+				while ((j < 3) && (k < resp.Item.CastMembers.Count))
+				{
+					if (!resp.Item.CastMembers[k].Equals(null))
+					{
+						actors[k] = resp.Item.CastMembers[k].Name;
+						j++;
+					}
+					k++;
+				}
 
-            int j = 0;
-            int k = 0;
-            while ((j < 3) && (k < resp.Item.CastMembers.Count))
-            {
-                if (!resp.Item.CastMembers[k].Equals(null)) 
-                {
-                    actors[k] = resp.Item.CastMembers[k].Name;
-                    j++;
-                }
-                k++;
-            }
-
-            actors_3 = actors[0] + ", " + actors[1] + ", " + actors[2];
+				actors_3 = actors[0] + ", " + actors[1] + ", " + actors[2];
+				
+			}
 
             var posterlink = i.PosterPath;
 

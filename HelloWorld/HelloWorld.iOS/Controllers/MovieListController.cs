@@ -17,7 +17,7 @@ namespace HelloWorld.iOS
 		public override void ViewDidLoad()
         {
             this.Title = "Movie List";
-            this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.FromRGB(0.714f, 0.98f, 1);
             this.TableView.Source = new MovieListSource(this._movieList, OnSelectedMovie);
             this.TableView.ReloadData();
         }

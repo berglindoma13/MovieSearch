@@ -56,7 +56,7 @@ namespace HelloWorld.iOS
             _movie.Review = response.Item.Overview;
             _movie.Genre = genreList;
 
-			this.View.BackgroundColor = UIColor.White;
+			this.View.BackgroundColor = UIColor.FromRGB(0.714f, 0.98f, 1);
 			this._yCoord = StartY;
 
 			var movieImage = createImage();
@@ -88,7 +88,7 @@ namespace HelloWorld.iOS
 			{
 				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
 				Text = _movie.Title + " (" + _movie.Year + ")",
-				Font = UIFont.FromName("Cochin-BoldItalic", 18f),
+				Font = UIFont.FromName("AmericanTypewriter", 18f),
 				TextColor = UIColor.FromRGB(127, 51, 0)
 			};
 

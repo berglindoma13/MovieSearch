@@ -17,16 +17,15 @@ namespace HelloWorld.iOS
             _imageView = new UIImageView();
             _nameLabel = new UILabel()
             {
-                Font = UIFont.FromName("Cochin-BoldItalic", 18f),
-                TextColor = UIColor.FromRGB(127, 51, 0),
+                Font = UIFont.FromName("AmericanTypewriter", 18f),
+                TextColor = UIColor.FromRGB(127, 51, 0)
             };
             _actorLabel = new UILabel()
             {
                 Font = UIFont.FromName("AmericanTypewriter", 12f),
                 TextColor = UIColor.FromRGB(38, 127, 0),
-                TextAlignment = UITextAlignment.Left,
+                TextAlignment = UITextAlignment.Left
             };
-
             ContentView.AddSubviews(new UIView[] {_imageView, _nameLabel, _actorLabel});
         }
 
@@ -37,6 +36,7 @@ namespace HelloWorld.iOS
             _imageView.Frame = new CGRect(5, 5, 33, 33);
             _nameLabel.Frame = new CGRect(45, 5, ContentView.Bounds.Width - 50, 25);
             _actorLabel.Frame = new CGRect(45, 25, ContentView.Bounds.Width - 50, 20);
+			BackgroundColor = UIColor.FromRGB(0.714f, 0.98f, 1);
         }
 
         public void UpdateCell(string title, string year, string imageName, string actors, int runtime,

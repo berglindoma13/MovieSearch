@@ -33,7 +33,7 @@ namespace HelloWorld.iOS
 
             this.Title = "Movie Search";
 
-            this.View.BackgroundColor = UIColor.White;
+			this.View.BackgroundColor = UIColor.FromRGB(0.714f, 0.98f, 1);
 
             this._yCoord = StartY;
 
@@ -88,7 +88,7 @@ namespace HelloWorld.iOS
 
 			greetingButton.Layer.CornerRadius = 5f;
 			greetingButton.Layer.BorderWidth = 0.5f;
-			greetingButton.BackgroundColor = UIColor.LightGray;
+			greetingButton.BackgroundColor = UIColor.FromRGB(0.259f, 0.678f, 0.988f);
 			greetingButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
 
             this._yCoord += StepY + 10;
