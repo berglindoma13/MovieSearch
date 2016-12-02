@@ -48,7 +48,14 @@ namespace HelloWorld.iOS
 
             var localFilePath = imdown.LocalPathForFilename(posterlink);
 
-            await imdown.DownloadImage(posterlink, localFilePath, CancellationToken.None);
+			if (localFilePath != "")
+			{
+				await imdown.DownloadImage(posterlink, localFilePath, CancellationToken.None);
+			}
+			else 
+			{
+				localFilePath = "not_found-full.png";
+			}
 
             movie.Id = i.Id;
             movie.Title = i.Title;

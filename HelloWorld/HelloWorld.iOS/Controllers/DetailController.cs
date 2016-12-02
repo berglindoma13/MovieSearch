@@ -87,8 +87,11 @@ namespace HelloWorld.iOS
 			var movieName = new UILabel()
 			{
 				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
-				Text = _movie.Title + " (" + _movie.Year + ")"
+				Text = _movie.Title + " (" + _movie.Year + ")",
+				Font = UIFont.FromName("Cochin-BoldItalic", 18f),
+				TextColor = UIColor.FromRGB(127, 51, 0)
 			};
+
 			this._yCoord += StepY;
 			return movieName;
 		}
@@ -98,7 +101,9 @@ namespace HelloWorld.iOS
 			var details = new UILabel()
 			{
 				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
-				Text = _movie.Runtime.ToString() + " min | " + _movie.Genre
+				Text = _movie.Runtime.ToString() + " min | " + _movie.Genre,
+				Font = UIFont.FromName("AmericanTypewriter", 12f),
+				TextColor = UIColor.FromRGB(38, 127, 0)
 			
 			};
 			this._yCoord += StepY;
@@ -109,12 +114,13 @@ namespace HelloWorld.iOS
 		{
 			var overview = new UILabel()
 			{
-				Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 150),
+				Frame = new CGRect(HorizontalMargin, this._yCoord+20, this.View.Bounds.Width - 2 * HorizontalMargin, 50),
 				Text = _movie.Review,
-                Font = UIFont.FromName("AmericanTypewriter-Light", 10f),
+                Font = UIFont.FromName("AmericanTypewriter", 10f),
                 Lines = 0
 			};
-			this._yCoord += StepY;
+			overview.SizeToFit();
+			this._yCoord += StepY+20;
 			return overview;
 		}
 	}

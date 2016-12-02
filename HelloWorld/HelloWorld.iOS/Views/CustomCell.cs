@@ -42,15 +42,9 @@ namespace HelloWorld.iOS
         public void UpdateCell(string title, string year, string imageName, string actors, int runtime,
             string genre, string review)
         {
-            if (imageName != null)
-            {
-                _imageView.Image = UIImage.FromFile(imageName);
+       
+            _imageView.Image = UIImage.FromFile(imageName);
 
-            }
-            else
-            {
-                _imageView.Image = UIImage.FromFile("not_found-full.png");
-            }
             _nameLabel.Text = title + " (" + year + ")";
 
 

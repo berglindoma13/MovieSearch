@@ -45,31 +45,34 @@ namespace HelloWorld.iOS
 
             greetingButton.TouchUpInside += async (sender, args) =>
                 {
-                    this._movies.AllMovies.Clear();
-                    nameField.ResignFirstResponder();
-                    greetingButton.Enabled = false;
+					if (nameField.Text != "")
+					{
+						this._movies.AllMovies.Clear();
+						nameField.ResignFirstResponder();
+						greetingButton.Enabled = false;
+
+						//create the spinner whilst finding movies
+						var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
+
+						spinner.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
+						this.View.AddSubview(spinner);
+						spinner.StartAnimating();
+
+						var movieApi = MovieDbFactory.Create<DM.MovieApi.MovieDb.Movies.IApiMovieRequest>().Value;
+						DM.MovieApi.ApiResponse.ApiSearchResponse<DM.MovieApi.MovieDb.Movies.MovieInfo> response = await movieApi.SearchByTitleAsync(nameField.Text);
+
+						foreach (var i in response.Results)
+						{
+							var movie = new Movie();
+							await setMovieInfo.setInfo(i, movieApi, movie);
+							this._movies.AllMovies.Add(movie);
+						}
+
+						this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
+						spinner.StopAnimating();
+						greetingButton.Enabled = true;
+					}
                     
-                    //create the spinner whilst finding movies
-                    var spinner = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray);
-
-                    spinner.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
-                    this.View.AddSubview(spinner);
-                    spinner.StartAnimating();
-
-                    var movieApi = MovieDbFactory.Create<DM.MovieApi.MovieDb.Movies.IApiMovieRequest>().Value;
-
-                    DM.MovieApi.ApiResponse.ApiSearchResponse<DM.MovieApi.MovieDb.Movies.MovieInfo> response = await movieApi.SearchByTitleAsync(nameField.Text);
-                    
-                    foreach (var i in response.Results)
-                    {
-                        var movie = new Movie();
-                        await setMovieInfo.setInfo(i, movieApi, movie);
-                        this._movies.AllMovies.Add(movie);
-                    }
-
-                    this.NavigationController.PushViewController(new MovieListController(this._movies.AllMovies), true);
-                    spinner.StopAnimating();
-                    greetingButton.Enabled = true;
                 };
 
             this.View.AddSubview(prompt);
@@ -80,9 +83,15 @@ namespace HelloWorld.iOS
         private UIButton CreateButton(string title)
         {
             var greetingButton = UIButton.FromType(UIButtonType.RoundedRect);
-            greetingButton.Frame = new CGRect(HorizontalMargin, this._yCoord, this.View.Bounds.Width - 2*HorizontalMargin, 50);
+			greetingButton.Frame = new CGRect(HorizontalMargin, this._yCoord+10, this.View.Bounds.Width - 2 * HorizontalMargin, 50);
             greetingButton.SetTitle(title, UIControlState.Normal);
-            this._yCoord += StepY;
+
+			greetingButton.Layer.CornerRadius = 5f;
+			greetingButton.Layer.BorderWidth = 0.5f;
+			greetingButton.BackgroundColor = UIColor.LightGray;
+			greetingButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
+
+            this._yCoord += StepY + 10;
             return greetingButton;
         }
 

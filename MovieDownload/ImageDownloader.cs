@@ -31,15 +31,17 @@ namespace MovieDownload
 
         public async Task DownloadImage(string remoteFilePath, string localFilePath, CancellationToken token)
         {
-            var fileStream = new FileStream(
-                                 localFilePath,
-                                 FileMode.Create,
-                                 FileAccess.Write,
-                                 FileShare.None,
-                                 short.MaxValue,
-                                 true);
+			var fileStream = new FileStream(
+								 localFilePath,
+								 FileMode.Create,
+								 FileAccess.Write,
+								 FileShare.None,
+								 short.MaxValue,
+								 true);
+          
             try
             {
+				
                 await this._imageStorage.DownloadAsync(remoteFilePath, fileStream, token);
             }
             catch (Exception ex)
