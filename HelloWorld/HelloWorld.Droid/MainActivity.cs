@@ -26,10 +26,9 @@ namespace HelloWorld.Droid
 			// Get our button from the layout resource,
 			// and attach an event to it
 			var button = FindViewById<Button>(Resource.Id.searchButton);
-			var info = FindViewById<TextView>(Resource.Id.textView1);
 			var search = FindViewById<EditText>(Resource.Id.searchTextField);
-			//var movieResult = FindViewById<TextView>(Resource.Id.movieResult);
-			var movieResult = FindViewById<TextView>(2131099651);
+			var movieResult = FindViewById<TextView>(Resource.Id.movieResult);
+			//var movieResult = FindViewById<TextView>(2131099651);
 
 
 			button.Click += async delegate
